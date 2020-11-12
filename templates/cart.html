@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- meta data & title -->
+        <meta charset="utf-8">
+        <title>home</title>
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='website/assets/bootstrap/css/bootstrap.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='website/assets/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='website/assets/css/style.css')}}">     
+    </head>
+  <body class="cartpage">
+
+	<style>
+	.cartpage{
+	background-image: url('static/website/assets/img/slider/q4.jpg');
+	}
+	.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+
+.button3 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #f44336;
+}
+
+.button3:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+	
+	</style>
+    <!--Header-->
+    <div class="body-head">
+        <img width="30%" src="static\website/assets/img/slider/lolo.png">
+		<div style="float:right;margin-right:15%;margin-top:10%">
+		<form action="/home" method="POST,GET">
+		<button  onclick="home()">Continue Shopping</button>
+		</form>
+		</div>
+    </div>
+    <!--End header-->
+
+    <!--main body-->
+   <!--<body>-->
+   <div class="shopping-cart" style="background-color:white; width:70%;margin-left:15%;">
+   <div class="column-labels">
+   <hr style="border-top:3px solid black;">
+    <label class="product-image" style="margin-left:10%;">Image</label>
+    <label class="product-details" style="margin-left:10%;">Product</label>
+    <label class="product-price" style="margin-left:10%;">Price</label>
+    <label class="product-quantity" style="margin-left:10%;">Quantity</label>
+    <label class="product-removal" style="margin-left:10%;">Remove</label>
+    <label class="product-line-price" style="margin-left:10%;">Total</label>
+	</br>
+	<hr style="border-top:3px solid black;">
+  </div>
+    {% for e in l%}
+   <!--i want to read the table here----> 
+    <div class="product" >
+		<div class="product-image" style=" width:auto; float: left ;">
+			<img style="border-radius: 10%; margin-left:10%" width="150px" height="150px" src="{{e.img}}">
+		</div>
+		<div class="product-details" style="width:25%; float:left; margin-left:1%;">
+			<h4 class="product-title" style=" width:auto; margin-left:10%;">{{e.name}}</h4>
+			<p class="product-description" style="width:80% ;margin-left:10%;">{{e.description}}</p>
+		</div>
+		<div style="width=auto;">
+		<b class="product-price" style="float:left ;margin-right:10% ; ">{{e.price}} NIS</b>
+		</div>
+		<div class="product-quantity" style="width:auto; float:left ;margin-right:12% " >
+			<input style="width:30px" type="number" value="1" min="1">
+		</div>
+		<div class="product-removal" style="float:left; margin-right:10%">
+		<!--************************Changed*********************************-->
+		<form action="/remove" method="POST">
+			<button class="remove-product" name="test" value={{e.id}} style="background-color:#F08080" onclick="removeFromCart()">
+				Remove
+			</button>
+		</form>
+		<!--************************Changed*********************************-->
+		</div>
+		<div class="product-line-price">{{e.price}} NIS</div>
+	</div>
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
+		<hr style="border-top:1px solid black;">
+
+       {% endfor %}
+
+	<div style="width:50%; float: left">
+		<h3 style="width:50%;margin-left:25%;  font: 28px Algerian, sans-serif; color:#CD5C5C">TOTAL: {{sum}} NIS</h3>
+	</div>
+
+	<div style="width:50%;float:right; ">
+		<button class="button button3"  style="width:50%;margin-left:25%;"  onclick="sent()">Confirm</button>
+	</div>
+	<script>
+			function sent() {
+			  alert("Hi {{username}}, Your order has been successfully placed! A representative from us will contact you soon, thanks for choosing us :)");
+			}
+	</script>
+	
+	</br>
+	</br>
+	</br>
+     </div>
+	 
+   <!--</body>-->
+	
+	
+    <!--end main body-->
+
+    <!-- Footer -->
+    <footer> 
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3><i class="fa fa-map-marker"></i> Contact:</h3>
+                    <p class="footer-contact">
+                        Isreal,Jerusalem<br>
+                        Phone: 055-5555555<br>
+                        Email: rozaglow20@gmail.com<br>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h3><i class="fa fa-external-link"></i> Links</h3>
+                    <p> <a href="#"> About ( Who we are )</a></p>
+                    <p> <a href="#"> Services ( What we do )</a></p>
+                    <p> <a href="#"> Contact ( Feel free to contact )</a></p>
+                    <p> <a href="#"> Blog ( Write to us )</a></p>
+                    <p> <a href="#"> Team ( Meet the Team )</a></p> 
+                </div>
+              <div class="col-md-4">
+                <h3><i class="fa fa-heart"></i> Socialize</h3>
+                <div id="social-icons">
+                    <a href="mailto: rozaglow20@gmail.com" class="btn-group google-plus">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+                      <a href="https://instagram.com/roza_glow_?igshid=lagdvinrefc" class="btn-group instagram">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                      <a href="https://www.facebook.com/RozaGlow-108874877687720/?modal=admin_todo_tour" class="btn-group facebook">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                </div>
+              </div>    
+        </div>
+      </div>
+    </footer>
+
+
+  </body>
+</html>
